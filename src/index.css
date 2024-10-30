@@ -1,294 +1,261 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 
-  /* Creating animations for dark mode */
-  transition:
-    background-color 0.3s,
-    border 0.3s;
+.light {
+  --color-grey-100: #f3f4f6;
+  --color-yellow-700: #a16207;
+  --color-yellow-100: #fef9c3;
+  --color-grey-0: #fff;
+  --color-text-main: #374151;
+  --color-grey-500: #6b7280;
+  --color-bg-main: #f6f8fa;
+  --color-navlink-hover: #f5f3fa;
+  --border-color-hover: #483ebf;
+  --color-light-grey: #eae9f7;
+  --color-light-black: #f4f4f5;
+  --color-text-inProgress: #69b1e5;
+  --color-text-complete: #49a889;
+  --color-text-todo: #d49049;
+  --color-bg-todo: #f9f4eb;
+  --color-bg-complete: #ecfbf4;
+  --color-bg-inProgress: #edf4f9;
+  --color-red-700: #b91c1c;
+  -color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-stone-100: #00000069;
+  --color-brand-800: #3730a3;
+  --color-text-total: #483ebf;
+  transition: background-color 0.3s ease-in;
+}
+
+/* DarkMode */
+.dark {
+  --color-text-total: #483ebf;
+  --color-stone-100: #fcfcfd95;
+  --color-grey-0: #18212f;
+  --color-text-main: #e5e7eb;
+  --color-grey-500: #9ca3af;
+  --color-bg-main: #111827;
+  --color-navlink-hover: #111827;
+  --color-light-black: #111827;
+  --color-light-grey: #18212f;
+  --color-grey-100: #111827;
+  --color-bg-inProgress: #075985;
+  --color-text-inProgess: #e0f2fe;
+  --color-bg-complete: #166534;
+  --color-text-complete: #dcfce7;
+  --color-bg-todo: #854d0e;
+  --color-text-todo: #fef9c3;
+  --color-yellow-100: #854d0e;
+  --color-yellow-700: #fef9c3;
+  transition: background-color 0.3s, border 0.3s;
 }
 
 body {
+  color: var(--color-text-main);
   min-height: 100vh;
+  font-family: Inter, sans-serif;
+  transition: background-color 0.3s, border 0.3s;
 }
-
-svg {
-  width: 2rem;
-  height: 2rem;
-  color: #9ca3af;
-  transition: all 0.3s;
-}
-
-a:hover svg {
-  width: 2rem;
-  height: 2rem;
+.navLink:hover svg {
   color: #483ebf;
-  transition: all 0.3s;
 }
 
-.loader {
-  margin-inline: auto;
-  color: rgb(72, 62, 191);
-  font-size: 10px;
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
+.filter {
   position: relative;
-  text-indent: -9999em;
-  animation: mulShdSpin 1.3s infinite linear;
-  transform: translateZ(0);
 }
 
-@keyframes mulShdSpin {
-  0%,
-  100% {
-    box-shadow:
-      0 -3em 0 0.2em,
-      2em -2em 0 0em,
-      3em 0 0 -1em,
-      2em 2em 0 -1em,
-      0 3em 0 -1em,
-      -2em 2em 0 -1em,
-      -3em 0 0 -1em,
-      -2em -2em 0 0;
-  }
-  12.5% {
-    box-shadow:
-      0 -3em 0 0,
-      2em -2em 0 0.2em,
-      3em 0 0 0,
-      2em 2em 0 -1em,
-      0 3em 0 -1em,
-      -2em 2em 0 -1em,
-      -3em 0 0 -1em,
-      -2em -2em 0 -1em;
-  }
-  25% {
-    box-shadow:
-      0 -3em 0 -0.5em,
-      2em -2em 0 0,
-      3em 0 0 0.2em,
-      2em 2em 0 0,
-      0 3em 0 -1em,
-      -2em 2em 0 -1em,
-      -3em 0 0 -1em,
-      -2em -2em 0 -1em;
-  }
-  37.5% {
-    box-shadow:
-      0 -3em 0 -1em,
-      2em -2em 0 -1em,
-      3em 0em 0 0,
-      2em 2em 0 0.2em,
-      0 3em 0 0em,
-      -2em 2em 0 -1em,
-      -3em 0em 0 -1em,
-      -2em -2em 0 -1em;
-  }
-  50% {
-    box-shadow:
-      0 -3em 0 -1em,
-      2em -2em 0 -1em,
-      3em 0 0 -1em,
-      2em 2em 0 0em,
-      0 3em 0 0.2em,
-      -2em 2em 0 0,
-      -3em 0em 0 -1em,
-      -2em -2em 0 -1em;
-  }
-  62.5% {
-    box-shadow:
-      0 -3em 0 -1em,
-      2em -2em 0 -1em,
-      3em 0 0 -1em,
-      2em 2em 0 -1em,
-      0 3em 0 0,
-      -2em 2em 0 0.2em,
-      -3em 0 0 0,
-      -2em -2em 0 -1em;
-  }
-  75% {
-    box-shadow:
-      0em -3em 0 -1em,
-      2em -2em 0 -1em,
-      3em 0em 0 -1em,
-      2em 2em 0 -1em,
-      0 3em 0 -1em,
-      -2em 2em 0 0,
-      -3em 0em 0 0.2em,
-      -2em -2em 0 0;
-  }
-  87.5% {
-    box-shadow:
-      0em -3em 0 0,
-      2em -2em 0 -1em,
-      3em 0 0 -1em,
-      2em 2em 0 -1em,
-      0 3em 0 -1em,
-      -2em 2em 0 0,
-      -3em 0em 0 0,
-      -2em -2em 0 0.2em;
-  }
-}
-.task-item {
-  position: relative;
-  transition: all ease-in 3s;
-}
-
-.task-item::after {
-  content: "";
+.filter::after {
+  content: '';
   position: absolute;
   left: 0;
   right: 0;
   bottom: -4px;
-  height: 5px;
-  width: 100%;
-  background-color: #483ebf;
+  height: 4px;
+  width: 90%;
+  background-color: var(--border-color-hover);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   opacity: 0;
   transition: opacity ease-in-out 0.3s;
 }
 
-.task-item:hover::after {
+.filter:hover::after {
   opacity: 1;
 }
-
-.task-item-active {
-  position: relative;
-  transition: all ease-in 3s;
+.filter:hover p {
+  color: var(--border-color-hover);
+  font-weight: 600;
 }
 
-.task-item-active::after {
-  content: "";
+.filter:hover div {
+  background-color: var(--color-light-grey);
+  color: var(--border-color-hover);
+}
+
+.filter-active p {
+  color: var(--border-color-hover);
+  font-weight: 600;
+}
+
+.filter-active div {
+  background-color: var(--color-light-grey);
+  color: var(--border-color-hover);
+}
+.filter-active::after {
+  content: '';
   position: absolute;
   left: 0;
   right: 0;
   bottom: -4px;
-  height: 5px;
-  width: 100%;
-  background-color: #483ebf;
+  height: 4px;
+  width: 90%;
+  background-color: var(--border-color-hover);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  opacity: 1;
+  transition: opacity ease-in-out 0.3s;
 }
 
-.smallloader {
+.filter-active {
   position: relative;
-  width: 55px;
-  height: 55px;
-  background-repeat: no-repeat;
-  background-image: linear-gradient(#483ebf 20px, transparent 0),
-    linear-gradient(#483ebf 20px, transparent 0),
-    linear-gradient(#483ebf 20px, transparent 0),
-    linear-gradient(#483ebf 20px, transparent 0),
-    linear-gradient(#483ebf 20px, transparent 0),
-    linear-gradient(#483ebf 20px, transparent 0);
-  background-size: 5px 20px;
-  background-position:
-    0px center,
-    10px center,
-    20px center,
-    30px center,
-    40px center,
-    50px center;
-  animation: spikeUp 1s linear infinite alternate;
 }
 
-@keyframes spikeUp {
-  0% {
-    background-size: 5px 20px;
-  }
-  16% {
-    background-size:
-      5px 30px,
-      5px 20px,
-      5px 20px,
-      5px 20px,
-      5px 20px,
-      5px 20px;
-  }
-  33% {
-    background-size:
-      5px 20px,
-      5px 30px,
-      5px 20px,
-      5px 20px,
-      5px 20px,
-      5px 20px;
-  }
-  50% {
-    background-size:
-      5px 20px,
-      5px 20px,
-      5px 30px,
-      5px 20px,
-      5px 20px,
-      5px 20px;
-  }
-  66% {
-    background-size:
-      5px 20px,
-      5px 20px,
-      5px 20px,
-      5px 30px,
-      5px 20px,
-      5px 20px;
-  }
-  83% {
-    background-size:
-      5px 20px,
-      5px 20px,
-      5px 20px,
-      5px 20px,
-      5px 30px,
-      5px 20px;
-  }
-  100% {
-    background-size:
-      5px 20px,
-      5px 20px,
-      5px 20px,
-      5px 20px,
-      5px 20px,
-      5px 30px;
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
   }
 }
 
-.comment:hover div {
-  color: #483ebf;
+.spinner {
+  margin: 30vh auto;
+  width: 6.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+        farthest-side,
+        var(--border-color-hover) 94%,
+        #0000
+      )
+      top/10px 10px no-repeat,
+    conic-gradient(#0000 30%, var(--border-color-hover));
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 10px), #000 0);
+  animation: rotate 1.5s infinite linear;
+}
+.normalButton:hover,
+.normalButton:hover svg {
+  color: white;
 }
 
-.comment:hover svg {
-  color: #483ebf;
+.file-input {
+  border-radius: 5px;
+  border: 1px solid var(--color-stone-100);
+  width: 100%;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.file-input::file-selector-button {
+  font: inherit;
+  font-weight: 500;
+  padding: 5px 10px;
+  margin-right: 1.2rem;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background-color: var(--color-brand-600);
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.file-input::file-selector-button:hover {
+  background-color: var(--color-brand-700);
+}
+
+.file-input::file-selector-button:active {
+  background-color: var(--color-brand-800);
+}
+
+.file-input::file-selector-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+styled-progress {
+  width: 100%;
+  height: 20px;
+  border-radius: 10px;
+  background-color: var(--color-yellow-100);
+  overflow: hidden;
+}
+
+.styled-progress::-webkit-progress-bar {
+  background-color: var(--color-yellow-100);
+  border-radius: 10px;
+}
+
+.styled-progress::-webkit-progress-value {
+  background-color: var(--color-yellow-700);
+  border-radius: 10px;
+}
+
+.styled-progress::-moz-progress-bar {
+  background-color: var(--color-yellow-700);
+  border-radius: 10px;
+}
+
+/* For other browsers */
+.styled-progress::-ms-fill {
+  background-color: var(--color-yellow-700);
+  border-radius: 10px;
+}
+
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+}
+
+.smallSpinner {
+  width: 50%;
+  padding: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--border-color-hover);
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: l3 1s infinite linear;
+}
+@keyframes l3 {
+  to {
+    transform: rotate(1turn);
+  }
 }
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 20 14.3% 4.1%;
+    --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
-    --card-foreground: 20 14.3% 4.1%;
+    --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14.3% 4.1%;
-    --primary: 24 9.8% 10%;
-    --primary-foreground: 60 9.1% 97.8%;
-    --secondary: 60 4.8% 95.9%;
-    --secondary-foreground: 24 9.8% 10%;
-    --muted: 60 4.8% 95.9%;
-    --muted-foreground: 25 5.3% 44.7%;
-    --accent: 60 4.8% 95.9%;
-    --accent-foreground: 24 9.8% 10%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 20 5.9% 90%;
-    --input: 20 5.9% 90%;
-    --ring: 20 14.3% 4.1%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -297,25 +264,25 @@ a:hover svg {
     --radius: 0.5rem;
   }
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 60 9.1% 97.8%;
-    --card: 20 14.3% 4.1%;
-    --card-foreground: 60 9.1% 97.8%;
-    --popover: 20 14.3% 4.1%;
-    --popover-foreground: 60 9.1% 97.8%;
-    --primary: 60 9.1% 97.8%;
-    --primary-foreground: 24 9.8% 10%;
-    --secondary: 12 6.5% 15.1%;
-    --secondary-foreground: 60 9.1% 97.8%;
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 60 9.1% 97.8%;
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 12 6.5% 15.1%;
-    --input: 12 6.5% 15.1%;
-    --ring: 24 5.7% 82.9%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -331,12 +298,4 @@ a:hover svg {
   body {
     @apply bg-background text-foreground;
   }
-}
-
-.taskButton:hover button {
-  color: white;
-}
-
-.taskButton:hover svg {
-  color: white;
 }

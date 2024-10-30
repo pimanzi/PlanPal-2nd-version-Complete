@@ -1,11 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { getTasks } from "../../services/apiTasks";
+import { useQuery } from '@tanstack/react-query';
+import { getTasks } from '../../services/apiTasks';
 
 export function useTasks() {
-  const { data, isPending, error } = useQuery({
-    queryKey: ["tasks"],
+  const { data: tasks, isLoading } = useQuery({
+    queryKey: ['personalTasks'],
     queryFn: getTasks,
   });
 
-  return { data, isPending, error };
+  return { tasks, isLoading };
 }

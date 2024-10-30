@@ -1,45 +1,48 @@
-import { FaUser } from "react-icons/fa";
-import { FiMoon, FiSun } from "react-icons/fi";
-import { useState } from "react";
-import { formatDate } from "../utils/helpers";
+import { useTranslation } from 'react-i18next';
+import { AvatarUi } from './AvatarUi';
+import DarkModeToogle from './DarkModeToggle';
+import { formatLocalizedDate } from '@/utils/helpers';
+import { LanguageSwitch } from './LanguageSwitch';
+import useUser from '@/features/authentication/useUser';
 
-function Header() {
-  const date = new Date();
-  const [dark, setDark] = useState<boolean>(false);
+export default function Header() {
+  const { user } = useUser();
+  const name = user?.user_metadata.fullName.split(' ')[0];
+  const { t } = useTranslation();
+  const todayDate = formatLocalizedDate(new Date());
+
   return (
-    <div className="flex items-center justify-around pb-2 pr-5 pt-6">
-      <p className="flex flex-col space-y-1">
-        <span className="block font-merriweather text-2xl font-bold">
-          <span className="-tracking-tighter text-second-main-color">
-            {" "}
-            Hello,
-          </span>
-          Placide!
-        </span>
-
-        <span className="font-inter text-base font-normal">
-          {formatDate(date)}
-        </span>
-      </p>
-      <input
-        type="text"
-        className="w-72 rounded-full bg-bg-header px-3 py-2 text-sm transition-all duration-300 placeholder:text-stone-500 focus:w-96 focus:outline-none focus:ring focus:ring-second-main-color focus:ring-opacity-50"
-        placeholder="Search tasks"
-      />
-      <div className="flex items-center gap-6">
-        <button
-          onClick={() => setDark(!dark)}
-          className="rounded-full bg-bg-header px-1 py-1"
-        >
-          {dark === false ? <FiMoon /> : <FiSun />}
-        </button>
-        <div className="flex items-center gap-3">
-          <FaUser color="#483ebf" />
-          <p className="font-inter text-lg font-medium">Imanzi Placide</p>
+    <div className=" py-3 pl-[30px] pr-[30px] xsPhone:py-5 xsTablet:pl-20 flex justify-between xsTablet:pr-10 bg-[var(--color-grey-0)] dark:bg-[var(--color-grey-0)]">
+      {' '}
+      <div>
+        <div className="flex items-center gap-4">
+          {' '}
+          <div className=" lg:hidden hidden xsPhone:block">
+            {' '}
+            <AvatarUi></AvatarUi>
+          </div>
+          <div>
+            {' '}
+            <p className="font-bold  text-2xl lg:text-3xl ">
+              {t('welcomeMessage')}{' '}
+              <span className="hidden xsPhone:hidden xs:inline text-[var(--border-color-hover)] dark:text-[var(--border-color-hover)]">
+                {name}
+              </span>
+            </p>
+            <p className="text-xs xs:text-lg xsPhone:text-xs font-medium text-[var(--color-grey-500)] dark:text-[var(--color-grey-500)]">
+              {todayDate}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="flex xs:gap-2 items-center gap-0 ">
+        <DarkModeToogle></DarkModeToogle>
+        <LanguageSwitch></LanguageSwitch>
+        <div className="hidden lg:block">
+          {' '}
+          <AvatarUi></AvatarUi>
         </div>
       </div>
     </div>
   );
 }
-
-export default Header;

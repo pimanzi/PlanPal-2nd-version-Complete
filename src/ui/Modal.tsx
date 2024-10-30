@@ -1,71 +1,55 @@
-import useDetectOutsideClick from "@/hooks/useDetectOutsideClick";
-import { cloneElement, createContext, useContext, useState } from "react";
-import { createPortal } from "react-dom";
-import { HiXMark } from "react-icons/hi2";
+import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
-interface ModalInterface {
-  showModal: string;
-  close: () => void;
-  open: React.Dispatch<React.SetStateAction<string>>;
-}
-const ModalContext = createContext<ModalInterface | undefined>(undefined);
-
-export default function Modal({ children }: { children: React.ReactNode }) {
-  const [showModal, setShowModal] = useState<string>("");
-
-  function close(): void {
-    setShowModal("");
-  }
-  const open = setShowModal;
-
+export function DialogDemo() {
   return (
-    <ModalContext.Provider value={{ showModal, close, open }}>
-      {children}
-    </ModalContext.Provider>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline">Edit Profile</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+          <DialogDescription>
+            Make changes to your profile here. Click save when you're done.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Name
+            </Label>
+            <Input
+              id="name"
+              defaultValue="Pedro Duarte"
+              className="col-span-3"
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Username
+            </Label>
+            <Input
+              id="username"
+              defaultValue="@peduarte"
+              className="col-span-3"
+            />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
-
-function Open({
-  children,
-  opens,
-}: {
-  children: React.ReactNode;
-  opens: string;
-}) {
-  const { open } = useContext(ModalContext)!;
-  return cloneElement(children, { onClick: () => open(opens) });
-}
-
-function Window({
-  children,
-  opensName,
-}: {
-  children: React.ReactNode;
-  opensName: string;
-}) {
-  const { showModal, close } = useContext(ModalContext)!;
-  const ref = useDetectOutsideClick(close, true);
-
-  if (showModal !== opensName) return null;
-
-  return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <div
-        ref={ref}
-        className="relative w-full max-w-lg -translate-x-1/2 -translate-y-1/2 transform rounded-lg bg-white p-8 shadow-lg transition-all"
-      >
-        <button
-          onClick={close}
-          className="absolute right-4 top-3 rounded-sm p-2 hover:bg-gray-200"
-        >
-          <HiXMark className="h-6 w-6 text-gray-500" />
-        </button>
-        <div>{cloneElement(children, { onClose: close })}</div>
-      </div>
-    </div>,
-    document.body,
-  );
-}
-
-Modal.Window = Window;
-Modal.Open = Open;
