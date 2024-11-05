@@ -4,14 +4,15 @@
 
 1. [Description](#description)
 2. [Technologies](#technologies)
-3. [Installation](#installation)
-4. [Running Tests](#running-tests)
-5. [Author](#author)
-6. [Contribution](#contribution)
+3. [Live Demo](#livedemo)
+4. [Installation](#installation)
+5. [Running Tests](#running-tests)
+6. [Author](#author)
+7. [Contribution](#contribution)
 
 ## Description  
 
-PlanPal is a simple task management app that helps users schedule their tasks, track their progress, and view their daily activities. It features a modern UI/UX design, dark mode, and a language translator. Built with React, TypeScript, and Tailwind CSS, it also includes a real database powered by Supabase. Testing is facilitated using Vitest to ensure a robust and reliable application. The application is still adding many features such as authentication, calendar, drag, and drop features.
+PlanPal is a simple task management app that helps users schedule their tasks, track their progress, and view their daily activities. It features a modern UI/UX design, dark mode, and a language translator. Built with React, TypeScript, and Tailwind CSS, it also includes a real database powered by Supabase. Testing is facilitated using Vitest to ensure a robust and reliable application.
 
 ## Technologies
 
@@ -22,6 +23,9 @@ PlanPal is a simple task management app that helps users schedule their tasks, t
 - **Vitest**: For running tests.
 - **Netlify**: For deployment.
 
+##Live Demo
+
+Please find the live demo here : [planPal](https://planpall.netlify.app)
 
 ## Installation
 

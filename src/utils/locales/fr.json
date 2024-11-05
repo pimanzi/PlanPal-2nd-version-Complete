@@ -59,23 +59,6 @@
   "navTasks": "Tâches",
   "navSignout": "Quitter",
   "dashboard": "Tableau de bord",
-  "calendar": {
-    "months": [
-      "Janvier",
-      "Février",
-      "Mars",
-      "Avril",
-      "Mai",
-      "Juin",
-      "Juillet",
-      "Août",
-      "Septembre",
-      "Octobre",
-      "Novembre",
-      "Décembre"
-    ],
-    "weekdays": ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"]
-  },
   "profile": "Profil",
   "passwordTitleForm": "Définir le mot de passe",
   "newPasswordInput": "Nouveau mot de passe",
@@ -87,5 +70,17 @@
   "fullNameInput": "Nom complet",
   "saveChangesButton": "Enregistrer les modifications",
   "updateUserMessage": "Compte utilisateur mis à jour avec succès",
-  "accountPageTitle": "Mon Compte"
+  "accountPageTitle": "Mon Compte",
+  "calendar": "Calendrier",
+  "allDay": "Toute la journée",
+  "previous": "Précédent",
+  "next": "Suivant",
+  "today": "Aujourd'hui",
+  "month": "Mois",
+  "week": "Semaine",
+  "day": "Jour",
+  "agenda": "Agenda",
+  "date": "Date",
+  "time": "Heure",
+  "event": "Événement"
 }

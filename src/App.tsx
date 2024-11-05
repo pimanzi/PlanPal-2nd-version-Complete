@@ -10,6 +10,7 @@ import Signup from './pages/SignupPage';
 import ProtectedRoute from './ui/ProtectedRoute';
 import Account from './pages/Account';
 import LanguageProvider from './contexts/LanguageContext';
+import Calendar from './pages/Calendar';
 const Home = lazy(() => import('./pages/Home'));
 const Tasks = lazy(() => import('./pages/Tasks'));
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
@@ -55,6 +56,7 @@ function App() {
                 <Route element={<Home></Home>} path="home"></Route>
                 <Route element={<Tasks></Tasks>} path="tasks"></Route>
                 <Route element={<Account></Account>} path="myProfile"></Route>
+                <Route element={<Calendar></Calendar>} path="calendar"></Route>
               </Route>
               <Route element={<LogInPage></LogInPage>} path="login"></Route>
               <Route element={<Signup></Signup>} path="signup"></Route>

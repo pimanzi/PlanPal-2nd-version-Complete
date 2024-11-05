@@ -59,23 +59,6 @@
   "navTasks": "Tasks",
   "navSignout": "Sign Out",
   "dashboard": "Dashboard",
-  "calendar": {
-    "months": [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ],
-    "weekdays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-  },
   "profile": "Profile",
   "passwordTitleForm": "Set password",
   "newPasswordInput": "New Password",
@@ -87,5 +70,17 @@
   "fullNameInput": "Full name",
   "saveChangesButton": "Save changes",
   "updateUserMessage": "User account successfully updated",
-  "accountPageTitle": "My Account"
+  "accountPageTitle": "My Account",
+  "calendar": "Calendar",
+  "allDay": "All Day",
+  "previous": "Previous",
+  "next": "Next",
+  "today": "Today",
+  "month": "Month",
+  "week": "Week",
+  "day": "Day",
+  "agenda": "Agenda",
+  "date": "Date",
+  "time": "Hour",
+  "event": "Event"
 }
