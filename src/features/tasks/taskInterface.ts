@@ -8,5 +8,7 @@ export interface Tasks {
   startDate: string;
   endDate: string;
   type: string;
+  startTime: string;
+  endTime: string;
   projectId: number | null;
 }

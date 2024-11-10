@@ -6,7 +6,7 @@ type Event = {
   start: Date;
   end: Date;
   title: string;
-  allDay: boolean;
+  status: 'completed' | 'inProgress' | 'toDo';
 };
 
 function CustomToolbar(props: ToolbarProps<Event, object>) {

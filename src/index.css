@@ -30,11 +30,16 @@
   --color-toolbar-bg: #f2eefa;
   --color-calendarHeader-bg: #fcfbff;
   --color-calendar-off: #e7e5e4e8;
+  --color-calendar-border: rgb(221, 221, 221, 0.4);
   transition: background-color 0.3s ease-in;
 }
 
 /* DarkMode */
 .dark {
+  --color-calendar-border: rgb(31 41 55);
+  --color-calendar-off: #18212f43;
+  --color-toolbar-bg: #18212f;
+  --color-calendarHeader-bg: #18212f;
   --color-text-total: #483ebf;
   --color-stone-100: #fcfcfd95;
   --color-grey-0: #18212f;
@@ -306,6 +311,11 @@ styled-progress {
 .rbc-header {
   background-color: var(--color-calendarHeader-bg);
   padding-block: 7px;
+  border: 1px solid var(--color-calendar-border) !important;
+}
+
+.rbc-month-view {
+  border: 1px solid var(--color-calendar-border) !important;
 }
 
 .rbc-off-range-bg {
@@ -318,6 +328,63 @@ styled-progress {
 .rbc-time-header-cell .rbc-header .rbc-button-link {
   padding-top: 7px;
   padding-bottom: 7px !important;
+}
+
+.rbc-allday-cell {
+  display: none !important;
+}
+
+.rbc-event {
+  background-color: transparent !important;
+  height: auto;
+}
+.rbc-day-bg {
+  overflow-y: auto;
+  border: 0.2px solid var(--color-calendar-border) !important;
+}
+.rbc-month-row {
+  border: 0.2px solid var(--color-calendar-border) !important;
+}
+.rbc-time-view {
+  border: 0.2px solid var(--color-calendar-border) !important;
+}
+
+.rbc-time-content {
+  border: 0.2px solid var(--color-calendar-border) !important;
+}
+.rbc-day-slot .rbc-event {
+  border: none !important;
+  width: 100% !important;
+}
+
+.rbc-time-slot {
+  border: 0.2px solid var(--color-calendar-border) !important;
+}
+
+.rbc-timeslot-group {
+  border: 0.2px solid var(--color-calendar-border) !important;
+}
+
+.rbc-events-container {
+  border: 0.2px solid var(--color-calendar-border) !important;
+}
+
+.rbc-time-header-content {
+  border: 0.2px solid var(--color-calendar-border) !important;
+}
+
+.rbc-event-label {
+  display: none !important;
+}
+
+.rbc-agenda-date-cell {
+  border: 0.2px solid var(--color-calendar-border) !important;
+}
+.rbc-agenda-time-cell {
+  border: 0.2px solid var(--color-calendar-border) !important;
+}
+.rbc-agenda-event-cell {
+  border: 0.2px solid var(--color-calendar-border) !important;
 }
 
 /* time picker */

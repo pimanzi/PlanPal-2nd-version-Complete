@@ -24,7 +24,6 @@ import { useTranslation } from 'react-i18next';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { LanguageContext } from '@/contexts/LanguageContext';
 import { LocaleKey, locales } from '@/utils/i18n/i18n';
-
 export interface FormData {
   title: string;
   startDate: Date;
@@ -68,8 +67,10 @@ export function CreateTask() {
   const onSubmit = (data: FormData) => {
     const transformedData = {
       ...data,
-      startDate: data.startDate.toISOString(),
-      endDate: data.endDate.toISOString(),
+      startTime: data.startTime,
+      endTime: data.endTime,
+      startDate: data.startDate.toLocaleString(),
+      endDate: data.endDate.toLocaleString(),
       image: data.image?.[0] || undefined,
     };
     createTask(transformedData, {
