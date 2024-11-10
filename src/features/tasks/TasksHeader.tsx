@@ -24,7 +24,7 @@ function TasksHeader() {
         </h2>
         <p className="font-inter text-lg  text-[var(--color-grey-500)]">
           {t('motivationTaskHeader1')}{' '}
-          <span className="text-second-main-color">
+          <span className="text-[var(--color-text-total)] font-bold">
             {t('motivationTaskHeader2')}
           </span>
         </p>

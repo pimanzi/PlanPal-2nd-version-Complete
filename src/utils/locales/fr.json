@@ -82,5 +82,7 @@
   "agenda": "Agenda",
   "date": "Date",
   "time": "Heure",
-  "event": "Événement"
+  "event": "Événement",
+  "startTimeInputAlert": "l'heure de début est requise",
+  "endTimeInputAlert": "l'heure de fin est requise"
 }

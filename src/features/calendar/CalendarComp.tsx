@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import { LanguageContext } from '@/contexts/LanguageContext';
 import { LocaleKey } from '@/utils/i18n/i18n';
 import { useTasks } from '@/features/tasks/useTasks';
+import CustomToolbar from './calendarToolBar';
 
 const locales = {
   fr: fr,
@@ -16,12 +17,21 @@ const locales = {
 
 export default function CalendarComp() {
   const { tasks } = useTasks();
-  const events = tasks?.map((task) => ({
-    start: new Date(new Date(task.startDate).setHours(0, 0, 0, 0)),
-    end: new Date(new Date(task.endDate).setHours(23, 59, 59, 999)),
-    title: task.title,
-    allDay: true,
-  }));
+  // const events = tasks?.map((task) => ({
+  //   start: new Date(new Date(task.startDate).setHours(0, 0, 0, 0)),
+  //   end: new Date(new Date(task.endDate).setHours(23, 59, 59, 999)),
+  //   title: task.title,
+  //   allDay: true,
+  // }));
+  const events = [
+    {
+      start: new Date('2024-11s-6T12:50:00'),
+      end: new Date('2024-11-7T12:50:00'),
+      title: 'Learning Machine learning',
+      allDay: true,
+    },
+  ];
+
   const { language } = useContext(LanguageContext);
   const { t } = useTranslation();
   const localizer = dateFnsLocalizer({
@@ -40,6 +50,12 @@ export default function CalendarComp() {
 
   return (
     <Calendar
+      views={{
+        month: true,
+        week: true,
+        agenda: true,
+        day: false,
+      }}
       localizer={localizer}
       events={events}
       startAccessor="start"
@@ -56,6 +72,9 @@ export default function CalendarComp() {
         date: t('date'),
         time: t('time'),
         event: t('event'),
+      }}
+      components={{
+        toolbar: CustomToolbar,
       }}
     />
   );

@@ -27,6 +27,9 @@
   --color-stone-100: #00000069;
   --color-brand-800: #3730a3;
   --color-text-total: #483ebf;
+  --color-toolbar-bg: #f2eefa;
+  --color-calendarHeader-bg: #fcfbff;
+  --color-calendar-off: #e7e5e4e8;
   transition: background-color 0.3s ease-in;
 }
 
@@ -298,4 +301,52 @@ styled-progress {
   body {
     @apply bg-background text-foreground;
   }
+}
+/* react-big-calendar styles */
+.rbc-header {
+  background-color: var(--color-calendarHeader-bg);
+  padding-block: 7px;
+}
+
+.rbc-off-range-bg {
+  background-color: var(--color-calendar-off);
+}
+.rbc-today {
+  background-color: var(--color-toolbar-bg);
+}
+
+.rbc-time-header-cell .rbc-header .rbc-button-link {
+  padding-top: 7px;
+  padding-bottom: 7px !important;
+}
+
+/* time picker */
+.react-time-picker__wrapper {
+  border: 1px var(--color-stone-100) solid;
+  border-radius: 0.375rem;
+  padding-block: 2px;
+}
+
+.react-time-picker__inputGroup {
+  margin-left: 5px;
+}
+
+.react-time-picker__inputGroup__hour,
+.react-time-picker__inputGroup__minute,
+.react-time-picker__inputGroup__amPm {
+  background-color: transparent !important;
+  font-family: inherit;
+  color: var(--color-grey-500) !important;
+}
+
+.react-time-picker__inputGroup__hour,
+.react-time-picker__inputGroup__minute,
+.react-time-picker__inputGroup__amPm {
+  background-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.react-time-picker__inputGroup__amPm option {
+  background-color: var(--color-grey-0);
 }
