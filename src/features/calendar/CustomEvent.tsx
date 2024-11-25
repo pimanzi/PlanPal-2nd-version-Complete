@@ -1,6 +1,5 @@
 import { LanguageContext } from '@/contexts/LanguageContext';
 import { LocaleKey, locales } from '@/utils/i18n/i18n';
-import React, { useContext } from 'react';
 import { BsDashLg } from 'react-icons/bs';
 
 interface Event {
