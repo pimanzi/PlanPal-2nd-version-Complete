@@ -26,7 +26,7 @@ export default function FilterBox({
       onClick={() => handleClick(option.value)}
     >
       <p className="text-[var(--color-grey-500)]">{option.field}</p>
-      <div className="rounded-full px-1 py-1  text-[var(--color-grey-500)] bg-[var(--color-light-black)]">
+      <div className="rounded-full px-2 py-1 flex items-center justify-center text-[var(--color-grey-500)] bg-[var(--color-light-black)]">
         {statusNumber}
       </div>
     </div>

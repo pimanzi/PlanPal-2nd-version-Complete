@@ -3,6 +3,7 @@ import { Tasks } from './taskInterface';
 import TaskItem from './TaskItem';
 import Grid from '../../ui/Grid';
 import { useSearchParams } from 'react-router-dom';
+import TasksOperations from './TasksOperations';
 
 export default function TasksOverview() {
   const { tasks } = useTasks();
@@ -23,10 +24,13 @@ export default function TasksOverview() {
   });
 
   return (
-    <Grid>
-      {sortedTasks?.map((task: Tasks) => (
-        <TaskItem task={task} key={task.id}></TaskItem>
-      ))}
-    </Grid>
+    <>
+      <TasksOperations></TasksOperations>
+      <Grid>
+        {sortedTasks?.map((task: Tasks) => (
+          <TaskItem task={task} key={task.id}></TaskItem>
+        ))}
+      </Grid>
+    </>
   );
 }

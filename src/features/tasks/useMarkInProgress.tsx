@@ -10,7 +10,7 @@ export function useMarkInProgress() {
         const newCol = {
           status: 'inProgress',
         };
-        return updateTaskStatus(newCol, id);
+        return updateTaskStatus(id, newCol.status);
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['personalTasks'] });

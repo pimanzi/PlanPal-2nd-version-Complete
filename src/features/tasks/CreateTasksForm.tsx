@@ -95,7 +95,7 @@ export function CreateTask() {
           onClick={() => setOpen(true)}
         />
       </DialogTrigger>
-      <DialogContent className="w-fit bg-[var(--color-grey-0)] border border-[var(--color-grey-0)]">
+      <DialogContent className="w-fit xs:w-[400px] bg-[var(--color-grey-0)] border border-[var(--color-grey-0)]">
         <DialogHeader>
           <DialogTitle>{t('formTitle')}</DialogTitle>
           <DialogDescription>{t('formDescription')}</DialogDescription>

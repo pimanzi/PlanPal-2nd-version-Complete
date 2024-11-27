@@ -3,8 +3,11 @@ import Filter, { StatusNumber } from '../../ui/Filter';
 import { useTasks } from './useTasks';
 import { CreateTask } from './CreateTasksForm';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { BsKanban } from 'react-icons/bs';
 
 export default function TasksOperations() {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const { tasks } = useTasks();
   const statusNumbers: StatusNumber = {
@@ -42,6 +45,13 @@ export default function TasksOperations() {
       </div>
 
       <div className=" hidden xsPhone:hidden xs:hidden sm:hidden  gap-4 smTablet:hidden bgTablet:flex laptop:flex xsTablet:hidden">
+        <button
+          onClick={() => navigate('/tasks/kanbanBoard')}
+          className=" hover:scale-105 flex items-center gap-2 rounded-md bg-[var(--border-color-hover)] px-4 py-2 text-sm font-medium text-white transition-all hover:bg-[var(--color-brand-700)]"
+        >
+          <BsKanban className="text-lg" />
+          Kanbar view
+        </button>
         <SelectUi
           selectOptions={[
             { value: 'date-asc', field: t('sortAscLabel') },

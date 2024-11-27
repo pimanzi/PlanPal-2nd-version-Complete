@@ -21,6 +21,14 @@ export default function CalendarComp() {
   const { tasks } = useTasks();
   const events = tasks
     ?.map((task) => {
+      if (
+        !task.startTime ||
+        !task.endTime ||
+        !task.startDate ||
+        !task.endDate
+      ) {
+        return [];
+      }
       const startDate = new Date(task.startDate);
       const endDate = new Date(task.endDate);
 

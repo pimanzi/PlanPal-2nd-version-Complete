@@ -11,6 +11,8 @@ import ProtectedRoute from './ui/ProtectedRoute';
 import Account from './pages/Account';
 import LanguageProvider from './contexts/LanguageContext';
 import Calendar from './pages/Calendar';
+import TasksOverview from './features/tasks/TasksOverview';
+import KanbanBoard from './features/tasks/KanbanBoard';
 const Home = lazy(() => import('./pages/Home'));
 const Tasks = lazy(() => import('./pages/Tasks'));
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
@@ -54,7 +56,21 @@ function App() {
                   element={<Navigate replace to="home"></Navigate>}
                 ></Route>
                 <Route element={<Home></Home>} path="home"></Route>
-                <Route element={<Tasks></Tasks>} path="tasks"></Route>
+                <Route element={<Tasks></Tasks>} path="tasks">
+                  <Route
+                    index
+                    element={<Navigate replace to="gridView"></Navigate>}
+                  ></Route>
+                  <Route
+                    element={<TasksOverview></TasksOverview>}
+                    path="/tasks/gridView"
+                  ></Route>
+
+                  <Route
+                    element={<KanbanBoard></KanbanBoard>}
+                    path="/tasks/kanbanBoard"
+                  ></Route>
+                </Route>
                 <Route element={<Account></Account>} path="myProfile"></Route>
                 <Route element={<Calendar></Calendar>} path="calendar"></Route>
               </Route>

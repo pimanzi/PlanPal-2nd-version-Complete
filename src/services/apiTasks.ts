@@ -60,25 +60,16 @@ export type ColUpdate = {
   status: string;
 };
 
-export async function updateTaskStatus(
-  newCol: ColUpdate,
-  id: number
-): Promise<Tasks> {
+export async function updateTaskStatus(id: number, status: string) {
   const { data, error } = await supabase
     .from('tasks')
-    .update(newCol)
+    .update({ status })
     .eq('id', id)
-    .select();
+    .select()
+    .single();
 
-  if (error) {
-    throw new Error(`Failed to update task: ${error.message}`);
-  }
-
-  if (data && data.length > 0) {
-    return data[0];
-  }
-
-  throw new Error('Task not found or update failed');
+  if (error) throw new Error(error.message);
+  return data;
 }
 
 export async function deleteTask(id: number) {

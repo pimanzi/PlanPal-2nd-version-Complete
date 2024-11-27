@@ -10,7 +10,7 @@ function AppLayout() {
       <div className="min-h-screen grid h-lvh smTablet:grid-cols-[15rem_1fr]  xsTablet:grid-cols-[10rem_1fr] grid-rows-[auto_1fr]">
         <Sidebar></Sidebar>
         <Header></Header>
-        <main className="overflow-y-auto bg-[var(--color-bg-main)]">
+        <main className="overflow-y-auto bg-[var(--color-bg-main)] mb-10">
           <Outlet></Outlet>
         </main>
       </div>

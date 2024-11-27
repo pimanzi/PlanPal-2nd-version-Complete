@@ -7,13 +7,12 @@ export function useMarkComplete() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { mutate: markComplete, isPending: isMarkingComplete } = useMutation({
-    mutationFn: (id: number) =>
-      updateTaskStatus(
-        {
-          status: 'completed',
-        },
-        id
-      ),
+    mutationFn: (id: number) => {
+      const newCol = {
+        status: 'completed',
+      };
+      return updateTaskStatus(id, newCol.status);
+    },
     onSuccess: () => {
       toast.success(t('toastToComplete'));
       queryClient.invalidateQueries({ queryKey: ['personalTasks'] });

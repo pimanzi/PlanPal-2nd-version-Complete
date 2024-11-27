@@ -32,6 +32,10 @@
   --color-calendar-off: #e7e5e4e8;
   --color-calendar-border: rgb(221, 221, 221, 0.4);
   transition: background-color 0.3s ease-in;
+  --color-kanban-column: #f8fafc; /* Light gray background for columns */
+  --color-kanban-card: #ffffff; /* White background for cards */
+  --color-kanban-text: #334155; /* Slate-700 for text */
+  --color-kanban-text-secondary: #64748b; /* Slate-500 for secondary text */
 }
 
 /* DarkMode */
@@ -59,6 +63,10 @@
   --color-yellow-100: #854d0e;
   --color-yellow-700: #fef9c3;
   transition: background-color 0.3s, border 0.3s;
+  --color-kanban-column: #1e293b; /* Slate-800 for column background */
+  --color-kanban-card: #334155; /* Slate-700 for card background */
+  --color-kanban-text: #e2e8f0; /* Slate-200 for text */
+  --color-kanban-text-secondary: #cbd5e1; /* Slate-300 for secondary text */
 }
 
 body {
