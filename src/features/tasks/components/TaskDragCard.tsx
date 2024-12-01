@@ -1,4 +1,4 @@
-import { useDraggable } from '@dnd-kit/core';
+import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Task } from '../types';
 
@@ -8,12 +8,14 @@ type TaskDragCardProps = {
 };
 
 export default function TaskDragCard({ task }: TaskDragCardProps) {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: task.id,
-  });
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: task.id,
+    });
 
   const style = {
-    transform: CSS.Translate.toString(transform),
+    transform: CSS.Transform.toString(transform),
+    transition,
   };
 
   return (
@@ -22,13 +24,13 @@ export default function TaskDragCard({ task }: TaskDragCardProps) {
       style={style}
       {...listeners}
       {...attributes}
-      className={`group cursor-grab rounded-md bg-[var(--color-grey-0)] p-4 shadow-sm  border transition-all hover:shadow-md hover:translate-y-[-2px] hover:border hover:border-[var(--color-text-${
+      className={`group cursor-grab rounded-md bg-[var(--color-grey-0)] p-4 shadow-sm border transition-all hover:shadow-md hover:translate-y-[-2px] hover:border hover:border-[var(--color-text-${
         task.status === 'completed'
           ? 'complete'
           : task.status === 'toDo'
           ? 'todo'
           : task.status
-      }] hover:border active:cursor-grabbin`}
+      })] hover:border active:cursor-grabbing`}
     >
       <div className="flex items-start justify-between">
         <h4

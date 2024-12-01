@@ -9,11 +9,16 @@ type InProgressColumnProps = {
 };
 
 export function InProgressColumn({ tasks }: InProgressColumnProps) {
-  const { setNodeRef } = useDroppable({
+  const { setNodeRef, isOver } = useDroppable({
     id: 'inProgress',
   });
+
+  const columnStyle = isOver ? 'opacity-70' : '';
+
   return (
-    <div className=" relative rounded-lg bg-[var(--color-bg-inProgress)] p-4 shadow-sm">
+    <div
+      className={`relative rounded-lg bg-[var(--color-bg-inProgress)] p-4 shadow-sm ${columnStyle}`}
+    >
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <BsClockHistory className="text-xl text-[var(--color-text-inProgress)]" />
@@ -25,9 +30,9 @@ export function InProgressColumn({ tasks }: InProgressColumnProps) {
           {tasks?.length || 0}
         </span>
       </div>
-      <div className="space-y-3" ref={setNodeRef}>
+      <div ref={setNodeRef} className="space-y-3">
         {tasks?.map((task) => (
-          <TaskDragCard key={task.id} task={task}></TaskDragCard>
+          <TaskDragCard key={task.id} task={task} />
         ))}
       </div>
     </div>

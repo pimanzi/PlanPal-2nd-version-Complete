@@ -3,11 +3,16 @@ import { updateTaskStatus } from '../../services/apiTasks';
 import { toast } from 'react-hot-toast';
 import { Task } from './types';
 
+interface UpdateStatusParams {
+  id: number;
+  status: 'toDo' | 'inProgress' | 'completed';
+}
+
 export function useUpdateDrag() {
   const queryClient = useQueryClient();
 
   const { mutate: markStatus } = useMutation({
-    mutationFn: ({ id, status }: { id: number; status: string }) =>
+    mutationFn: ({ id, status }: UpdateStatusParams) =>
       updateTaskStatus(id, status),
 
     onMutate: async ({ id, status }) => {

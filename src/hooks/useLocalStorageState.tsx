@@ -1,7 +1,8 @@
+import { Tasks } from '@/features/tasks/taskInterface';
 import { useState, useEffect } from 'react';
 
 export function useLocalStorageState(
-  initialState: boolean | string,
+  initialState: boolean | string | Tasks[] | undefined,
   key: string
 ) {
   const [value, setValue] = useState(function () {

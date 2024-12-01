@@ -4,53 +4,117 @@ import { useNavigate } from 'react-router-dom';
 import { TodoColumn } from './components/TodoColumn';
 import { InProgressColumn } from './components/InProgressColumn';
 import { CompletedColumn } from './components/CompletedColumn';
-import { DndContext, DragEndEvent, closestCorners } from '@dnd-kit/core';
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverEvent,
+  closestCorners,
+} from '@dnd-kit/core';
 import { useUpdateDrag } from './useUpdateDrag';
-import { useEffect, useState } from 'react';
+import { SortableContext, arrayMove } from '@dnd-kit/sortable';
+import { Task } from './types';
+import { useLocalStorageState } from '@/hooks/useLocalStorageState';
 
 export default function KanbanBoard() {
   const { tasks } = useTasks();
   const navigate = useNavigate();
   const { markStatus } = useUpdateDrag();
+  const [localTasks, setLocalTasks] = useLocalStorageState(
+    tasks || [],
+    'tasks'
+  );
 
-  const [localTasks, setLocalTasks] = useState(tasks || []);
-
-  useEffect(() => {
-    // Sync local tasks with remote tasks when tasks change
-    setLocalTasks(tasks || []);
-  }, [tasks]);
-
-  function handleDrag(event: DragEndEvent) {
+  const handleDragOver = (event: DragOverEvent) => {
     const { active, over } = event;
-
     if (!over) return;
 
-    const taskId = Number(active.id);
-    const newStatus = over.id as 'toDo' | 'inProgress' | 'completed';
+    const draggedId = Number(active.id);
 
-    // Only update if the status has changed
-    const task = localTasks?.find((t) => t.id === taskId);
-    if (task?.status === newStatus) return;
-
-    // Optimistically update the local state
-    setLocalTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId ? { ...task, status: newStatus } : task
-      )
+    const isOverContainer = ['toDo', 'inProgress', 'completed'].includes(
+      String(over.id)
     );
+    const overId = isOverContainer ? null : Number(over.id);
 
-    // Trigger backend update
-    markStatus({
-      id: taskId,
-      status: newStatus,
+    if (!isOverContainer && draggedId === overId) return;
+
+    setLocalTasks((prev: Task[]) => {
+      const draggedTask = prev.find((task: Task) => task.id === draggedId);
+      if (!draggedTask) return prev;
+
+      const newStatus = isOverContainer
+        ? (String(over.id) as Task['status'])
+        : prev.find((task: Task) => task.id === overId)?.status;
+
+      if (!newStatus) return prev;
+
+      if (draggedTask.status !== newStatus) {
+        const updatedTasks = prev.map((task: Task) =>
+          task.id === draggedId ? { ...task, status: newStatus } : task
+        );
+        return updatedTasks;
+      }
+
+      if (!isOverContainer) {
+        const tasksInColumn = prev.filter(
+          (task: Task) => task.status === draggedTask.status
+        );
+        const reorderedTasks = arrayMove(
+          tasksInColumn,
+          tasksInColumn.findIndex((task: Task) => task.id === draggedId),
+          tasksInColumn.findIndex((task: Task) => task.id === overId)
+        );
+
+        return [
+          ...prev.filter((task: Task) => task.status !== draggedTask.status),
+          ...reorderedTasks,
+        ];
+      }
+
+      return prev;
     });
-  }
-  const todoTasks = localTasks?.filter((task) => task.status === 'toDo');
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over) return;
+
+    const draggedId = Number(active.id);
+    const isOverContainer = ['toDo', 'inProgress', 'completed'].includes(
+      String(over.id)
+    );
+    const overId = isOverContainer ? null : Number(over.id);
+
+    const draggedTask = localTasks.find((task: Task) => task.id === draggedId);
+    if (!draggedTask) return;
+
+    const newStatus = isOverContainer
+      ? (String(over.id) as Task['status'])
+      : localTasks.find((task: Task) => task.id === overId)?.status;
+
+    if (!newStatus) return;
+
+    if (draggedTask.status !== newStatus) {
+      setLocalTasks((prev: Task[]) =>
+        prev.map((task: Task) =>
+          task.id === draggedId ? { ...task, status: newStatus } : task
+        )
+      );
+
+      markStatus({ id: draggedId, status: newStatus });
+    } else {
+      markStatus({
+        id: draggedId,
+        status: draggedTask.status,
+      });
+    }
+  };
+
+  const todoTasks = localTasks?.filter((task: Task) => task.status === 'toDo');
   const inProgressTasks = localTasks?.filter(
-    (task) => task.status === 'inProgress'
+    (task: Task) => task.status === 'inProgress'
   );
   const completedTasks = localTasks?.filter(
-    (task) => task.status === 'completed'
+    (task: Task) => task.status === 'completed'
   );
 
   return (
@@ -65,11 +129,29 @@ export default function KanbanBoard() {
         </button>
       </div>
 
-      <DndContext collisionDetection={closestCorners} onDragEnd={handleDrag}>
+      <DndContext
+        collisionDetection={closestCorners}
+        onDragOver={handleDragOver}
+        onDragEnd={handleDragEnd}
+      >
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          <TodoColumn tasks={todoTasks} />
-          <InProgressColumn tasks={inProgressTasks} />
-          <CompletedColumn tasks={completedTasks} />
+          <SortableContext
+            items={todoTasks?.map((task: Task) => task.id) || []}
+          >
+            <TodoColumn tasks={todoTasks} />
+          </SortableContext>
+
+          <SortableContext
+            items={inProgressTasks?.map((task: Task) => task.id) || []}
+          >
+            <InProgressColumn tasks={inProgressTasks} />
+          </SortableContext>
+
+          <SortableContext
+            items={completedTasks?.map((task: Task) => task.id) || []}
+          >
+            <CompletedColumn tasks={completedTasks} />
+          </SortableContext>
         </div>
       </DndContext>
     </>

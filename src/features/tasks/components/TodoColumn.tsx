@@ -10,11 +10,16 @@ type TodoColumnProps = {
 };
 
 export function TodoColumn({ tasks, onDeleteTask }: TodoColumnProps) {
-  const { setNodeRef } = useDroppable({
+  const { setNodeRef, isOver } = useDroppable({
     id: 'toDo',
   });
+
+  const columnStyle = isOver ? 'opacity-70' : '';
+
   return (
-    <div className="relative rounded-lg bg-[var(--color-bg-todo)] p-4 shadow-sm">
+    <div
+      className={`relative rounded-lg bg-[var(--color-bg-todo)] p-4 shadow-sm ${columnStyle}`}
+    >
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <HiOutlineClipboardList className="text-xl text-[var(--color-text-todo)]" />
