@@ -8,14 +8,21 @@ type TaskDragCardProps = {
 };
 
 export default function TaskDragCard({ task }: TaskDragCardProps) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: task.id,
-    });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: task.id,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    opacity: isDragging ? 0.5 : undefined,
   };
 
   return (
@@ -24,13 +31,23 @@ export default function TaskDragCard({ task }: TaskDragCardProps) {
       style={style}
       {...listeners}
       {...attributes}
-      className={`group cursor-grab rounded-md bg-[var(--color-grey-0)] p-4 shadow-sm border transition-all hover:shadow-md hover:translate-y-[-2px] hover:border hover:border-[var(--color-text-${
-        task.status === 'completed'
-          ? 'complete'
-          : task.status === 'toDo'
-          ? 'todo'
-          : task.status
-      })] hover:border active:cursor-grabbing`}
+      className={`group rounded-md bg-[var(--color-grey-0)] p-4 
+        border border-transparent
+        transition-all duration-200 ease-in-out
+        hover:shadow-lg hover:translate-y-[-2px]
+        hover:border-[var(--color-text-${
+          task.status === 'completed'
+            ? 'complete'
+            : task.status === 'toDo'
+            ? 'todo'
+            : task.status
+        })]
+        ${
+          isDragging
+            ? 'shadow-xl rotate-[2deg] scale-105 cursor-grabbing'
+            : 'cursor-grab shadow-sm'
+        }
+      `}
     >
       <div className="flex items-start justify-between">
         <h4
@@ -40,7 +57,7 @@ export default function TaskDragCard({ task }: TaskDragCardProps) {
               : task.status === 'toDo'
               ? 'todo'
               : task.status
-          })] group-hover:font-semibold`}
+          })] group-hover:font-semibold transition-all duration-200`}
         >
           {task.title}
         </h4>

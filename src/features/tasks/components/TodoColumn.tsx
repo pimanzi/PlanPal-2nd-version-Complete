@@ -14,7 +14,9 @@ export function TodoColumn({ tasks, onDeleteTask }: TodoColumnProps) {
     id: 'toDo',
   });
 
-  const columnStyle = isOver ? 'opacity-70' : '';
+  const columnStyle = isOver
+    ? 'bg-opacity-90 shadow-lg transform scale-[1.02] transition-all duration-200'
+    : 'transition-all duration-200';
 
   return (
     <div
