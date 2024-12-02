@@ -12,11 +12,11 @@ export default function TasksOverview() {
   const filteredTasks =
     filterField === 'all' || !filterField
       ? tasks
-      : tasks?.filter((task) => task.status === filterField);
+      : tasks?.filter((task: Tasks) => task.status === filterField);
   const sortField = searchParams.get('sortBy') || 'date-desc';
   const modifier = sortField === 'date-asc' ? 1 : -1;
 
-  const sortedTasks = filteredTasks?.sort((a, b) => {
+  const sortedTasks = filteredTasks?.sort((a: Tasks, b: Tasks) => {
     // Convert ISO strings to timestamps for comparison
     const dateA = new Date(a.created_at).getTime();
     const dateB = new Date(b.created_at).getTime();

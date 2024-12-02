@@ -5,6 +5,7 @@ import { CreateTask } from './CreateTasksForm';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { BsKanban } from 'react-icons/bs';
+import { Tasks } from './taskInterface';
 
 export default function TasksOperations() {
   const navigate = useNavigate();
@@ -13,9 +14,10 @@ export default function TasksOperations() {
   const statusNumbers: StatusNumber = {
     all: tasks?.length || 0,
     inProgress:
-      tasks?.filter((task) => task.status === 'inProgress').length || 0,
-    toDo: tasks?.filter((task) => task.status === 'toDo').length || 0,
-    completed: tasks?.filter((task) => task.status === 'completed').length || 0,
+      tasks?.filter((task: Tasks) => task.status === 'inProgress').length || 0,
+    toDo: tasks?.filter((task: Tasks) => task.status === 'toDo').length || 0,
+    completed:
+      tasks?.filter((task: Tasks) => task.status === 'completed').length || 0,
   };
   return (
     <div className="flex justify-between  smTablet:justify-between rounded-3xl bg-[var(--color-grey-0)] px-7 py-3 pt-4">

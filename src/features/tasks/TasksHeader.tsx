@@ -3,6 +3,7 @@ import { BsDot } from 'react-icons/bs';
 import { useTasks } from './useTasks';
 import { formatLocalizedDateShortActivity } from '@/utils/helpers';
 import { useSearchParams } from 'react-router-dom';
+import { Tasks } from './taskInterface';
 function TasksHeader() {
   const { tasks } = useTasks();
   const [searchParams] = useSearchParams();
@@ -10,7 +11,7 @@ function TasksHeader() {
   const modifier = sortField === 'date-asc' ? 1 : 1;
   const task = tasks ? tasks : [];
   const taskAsc = task.sort(
-    (a, b) =>
+    (a: Tasks, b: Tasks) =>
       (new Date(a.created_at).getTime() - new Date(b.created_at).getTime()) *
       modifier
   );

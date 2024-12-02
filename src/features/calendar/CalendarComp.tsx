@@ -9,6 +9,7 @@ import { LocaleKey } from '@/utils/i18n/i18n';
 import { useTasks } from '@/features/tasks/useTasks';
 import CustomToolbar from './calendarToolBar';
 import CustomEvent from './CustomEvent';
+import { Tasks } from '../tasks/taskInterface';
 
 const locales = {
   fr: fr,
@@ -20,7 +21,7 @@ export default function CalendarComp() {
   const [view, setView] = useState<views>('month'); // Initialize state correctly
   const { tasks } = useTasks();
   const events = tasks
-    ?.map((task) => {
+    ?.map((task: Tasks) => {
       if (
         !task.startTime ||
         !task.endTime ||
