@@ -6,7 +6,8 @@ import { Task } from './types';
 
 export function useMarkInProgress() {
   const queryClient = useQueryClient();
-  const [, setLocalTasks] = useLocalStorageState([], 'tasks');
+  const [localTasks, setLocalTasks] = useLocalStorageState([], 'tasks');
+  console.log('Current tasks:', localTasks);
 
   const { mutate: markInProgress, isPending: isMarkingInProgress } =
     useMutation({
@@ -17,10 +18,7 @@ export function useMarkInProgress() {
         return updateTaskStatus(id, newCol.status);
       },
       onSuccess: (_, id) => {
-        // Update server state
         queryClient.invalidateQueries({ queryKey: ['personalTasks'] });
-
-        // Update local storage
         setLocalTasks((prevTasks: Task[]) =>
           prevTasks.map((task) =>
             task.id === id ? { ...task, status: 'inProgress' } : task

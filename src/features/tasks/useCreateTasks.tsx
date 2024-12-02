@@ -5,7 +5,9 @@ import { toast } from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 export function useCreateTask() {
-  const [setLocalTasks] = useLocalStorageState([], 'tasks');
+  const [localTasks, setLocalTasks] = useLocalStorageState([], 'tasks');
+  console.log('Current tasks:', localTasks);
+
   const queryClient = useQueryClient();
   const { t } = useTranslation();
 

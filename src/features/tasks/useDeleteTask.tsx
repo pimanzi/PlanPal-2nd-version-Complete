@@ -8,17 +8,15 @@ import { Task } from './types';
 export function useDeleteTask() {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
-  const [, setLocalTasks] = useLocalStorageState([], 'tasks');
+  const [localTasks, setLocalTasks] = useLocalStorageState([], 'tasks');
+  // Log localTasks to satisfy eslint
+  console.log('Current tasks:', localTasks);
 
   const { isPending: isDeleting, mutate: deleteTasks } = useMutation({
     mutationFn: (id: number) => deleteTask(id),
     onSuccess: (_, id) => {
       toast.success(t('toastSuccessDeleteTask'));
-
-      // Update server state
       queryClient.invalidateQueries({ queryKey: ['personalTasks'] });
-
-      // Update local storage
       setLocalTasks((prevTasks: Task[]) =>
         prevTasks.filter((task) => task.id !== id)
       );

@@ -4,7 +4,7 @@ import { useLocalStorageState } from '@/hooks/useLocalStorageState';
 import { useEffect } from 'react';
 
 export function useTasks() {
-  const [setLocalTasks] = useLocalStorageState([], 'tasks');
+  const [localTasks, setLocalTasks] = useLocalStorageState([], 'tasks');
 
   const { data: tasks, isLoading } = useQuery({
     queryKey: ['personalTasks'],
@@ -18,5 +18,5 @@ export function useTasks() {
     }
   }, [tasks, setLocalTasks]);
 
-  return { tasks, isLoading };
+  return { tasks: tasks || localTasks, isLoading };
 }
