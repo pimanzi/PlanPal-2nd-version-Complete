@@ -1,0 +1,17 @@
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = true
+  # Only redirect paths that are not static files
+  query = { exclude = "assets,static" }
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Content-Type = "application/javascript"
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Content-Type = "application/javascript"
