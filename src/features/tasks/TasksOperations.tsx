@@ -52,7 +52,7 @@ export default function TasksOperations() {
           className=" hover:scale-105 flex items-center gap-2 rounded-md bg-[var(--border-color-hover)] px-4 py-2 text-sm font-medium text-white transition-all hover:bg-[var(--color-brand-700)]"
         >
           <BsKanban className="text-lg" />
-          Kanbar view
+          Kanban view
         </button>
         <SelectUi
           selectOptions={[

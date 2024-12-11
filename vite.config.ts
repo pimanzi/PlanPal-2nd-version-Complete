@@ -6,7 +6,7 @@ import path from 'path';
 export default defineConfig(
   (): UserConfig => ({
     plugins: [react()],
-    base: './',
+    base: '/',
     test: {
       environment: 'jsdom', // Specify jsdom as the test environment
       globals: true, // Enable global test functions
