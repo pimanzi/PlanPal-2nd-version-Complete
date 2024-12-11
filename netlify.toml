@@ -1,40 +1,4 @@
-# Redirect all requests to index.html except static assets like CSS, JS, images, etc.
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true
-  query = { exclude = "assets,static,css,js,png,jpg,gif,svg,woff,woff2,eot,ttf" }
-
-# Ensure the correct Content-Type for JavaScript files
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Content-Type = "application/javascript"
-
-[[headers]]
-  for = "/static/*"
-  [headers.values]
-    Content-Type = "application/javascript"
-
-# Ensure the correct Content-Type for CSS files
-[[headers]]
-  for = "/assets/*.css"
-  [headers.values]
-    Content-Type = "text/css"
-
-[[headers]]
-  for = "/static/*.css"
-  [headers.values]
-    Content-Type = "text/css"
-
-# Optional: Add headers for other assets like images, fonts, etc.
-[[headers]]
-  for = "/static/*.{png,jpg,jpeg,gif,svg}"
-  [headers.values]
-    Content-Type = "image/png"
-
-[[headers]]
-  for = "/static/*.{woff,woff2,eot,ttf}"
-  [headers.values]
-    Content-Type = "application/font-woff2"
